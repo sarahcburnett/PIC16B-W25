@@ -56,10 +56,59 @@
     "text": "Code\nThere are two main ways to insert code in your posts. When talking about a short concept, like the np.random.rand() function, you can type back ticks like this: `np.random.rand()`.\nTo create a larger block of code, use three consecutive backticks ``` to both open and close the code block. If you place the word “{python}” immediately after the opening code blocks, you’ll get attractive syntax highlighting:\n\ndef f(x):\n    \"\"\"\n    A cool function that multiples an input x by 2. \n    \"\"\"\n    return 2*x\n\ny = f(3)\nprint(y)\n\n6\n\n\nNot only that, once you render the page with Quarto, the code output will show up below. If that’s not what you want, use the word “python” instead of “{python}”\nLook at this other cool example from the Quarto tutorial.\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   },
   {
+    "objectID": "posts/hw0/index.html",
+    "href": "posts/hw0/index.html",
+    "title": "Homework 0",
+    "section": "",
+    "text": "In this blog post assignment, you’ll create a short post for your new website. The primary purpose is to give you some practice working with Quarto blogging with Python code.\nMake sure to check the “Specifications” section at the bottom of this assignment for an explicit list of criteria that your blog post must meet in order to receive credit.\nNOTE: Writing is always part of your homework! The recommended style is as if you are writing a tech blog post."
+  },
+  {
+    "objectID": "posts/hw0/index.html#complete-static-live-webpage-activity",
+    "href": "posts/hw0/index.html#complete-static-live-webpage-activity",
+    "title": "Homework 0",
+    "section": "1. Complete Static Live Webpage activity",
+    "text": "1. Complete Static Live Webpage activity\nYour first step should be to complete the Static Live Webpage activity to help you get familiar with blogging with Quarto. If you already completed this activity in Discussion, then you can skip to the next step.\nIf you haven’t done so already, now is a good time to modify your site. Look around the site’s files and see if you can figure out how to modify the About page and the blog’s title from about.qmd and _quarto.yml.\nSee these pages for help: about page, config options.\nIf you are comfortable with css, then you can directly modify style.css and other files in the repo.\nAll this is optional, and it’s not necessary to put your real name or real photo anywhere on the site."
+  },
+  {
+    "objectID": "posts/hw0/index.html#create-a-post",
+    "href": "posts/hw0/index.html#create-a-post",
+    "title": "Homework 0",
+    "section": "2. Create a post",
+    "text": "2. Create a post\nCreate a simple blog post, using the instructions and demonstrations here. Here is the prompt for your post:\n\nWrite a tutorial explaining how to construct an interesting data visualization of the Palmer Penguins data set.\n\nYou can read the data into Python by running:\nimport pandas as pd\nurl = \"https://raw.githubusercontent.com/pic16b-ucla/24W/main/datasets/palmer_penguins.csv\"\npenguins = pd.read_csv(url)\nYour visualization does not have to be complex or fancy, but it should be highly readable and appropriately labeled.\nYour post should include the image directly under the code that generates it, as demonstrated here.\nYour Gradescope submission with contain three files:\n\nA hw0.py with the code you used for the tutorial.\nThe index.qmd or index.ipynb (converted to index.py).\nA README.txt file with the url of your published page.\n\n\nHint\nThe easiest way to create a post like this is to solve the problem in a Jupyter Notebook or Python script first, and then transfer the results over to your blog."
+  },
+  {
+    "objectID": "posts/hw0/index.html#format",
+    "href": "posts/hw0/index.html#format",
+    "title": "Homework 0",
+    "section": "Format",
+    "text": "Format\n\nAll files above are submitted successfully by the deadline. The Github post is published by the deadline."
+  },
+  {
+    "objectID": "posts/hw0/index.html#coding-problem",
+    "href": "posts/hw0/index.html#coding-problem",
+    "title": "Homework 0",
+    "section": "Coding Problem",
+    "text": "Coding Problem\n\nThe code runs without errors and completes the task your tutorial describes.\nThe plot is readable and contains axis labels, a title, and a legend if appropriate."
+  },
+  {
+    "objectID": "posts/hw0/index.html#style-and-documentation",
+    "href": "posts/hw0/index.html#style-and-documentation",
+    "title": "Homework 0",
+    "section": "Style and Documentation",
+    "text": "Style and Documentation\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define."
+  },
+  {
+    "objectID": "posts/hw0/index.html#writing",
+    "href": "posts/hw0/index.html#writing",
+    "title": "Homework 0",
+    "section": "Writing",
+    "text": "Writing\n\nThe overall post is written in engaging and unambiguous English prose. There is written explanation throughout the post, such that a PIC16A student could learn to perform the demonstrated tasks by reading the post.\nEach block of code has a clearly-explained purpose.\nThe post is organized into clearly delimited sections using markdown headers (#), making it easier for the reader to navigate."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]
