@@ -56,6 +56,76 @@
     "text": "Code\nThere are two main ways to insert code in your posts. When talking about a short concept, like the np.random.rand() function, you can type back ticks like this: `np.random.rand()`.\nTo create a larger block of code, use three consecutive backticks ``` to both open and close the code block. If you place the word “{python}” immediately after the opening code blocks, you’ll get attractive syntax highlighting:\n\ndef f(x):\n    \"\"\"\n    A cool function that multiples an input x by 2. \n    \"\"\"\n    return 2*x\n\ny = f(3)\nprint(y)\n\n6\n\n\nNot only that, once you render the page with Quarto, the code output will show up below. If that’s not what you want, use the word “python” instead of “{python}”\nLook at this other cool example from the Quarto tutorial.\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   },
   {
+    "objectID": "posts/hw1/index.html",
+    "href": "posts/hw1/index.html",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "",
+    "text": "In this assignment, you’ll create several interesting, interactive data graphics using the NOAA climate data that we’ve explored in the first several weeks of lectures."
+  },
+  {
+    "objectID": "posts/hw1/index.html#instructions",
+    "href": "posts/hw1/index.html#instructions",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "Instructions",
+    "text": "Instructions\nYou will write some code which analyzes data and outputs tables and figures. You can work in jupyter lab, but in the end, you should carefully transfer your work to hw1.py."
+  },
+  {
+    "objectID": "posts/hw1/index.html#create-a-database",
+    "href": "posts/hw1/index.html#create-a-database",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "1. Create a Database",
+    "text": "1. Create a Database\nFirst, create a database with three tables: temperatures, stations, and countries. Refer back to lecture notes on how to access country names and relate them to temperature readings. Keep these as three separate tables in your database. Please refrain from changing column names. For countries, create a table from this CSV file used in the lecture.\nLet’s remove any rows with temperature measures of NaN when preparing the database. Make sure to close the database connection after you are finished constructing it.\nIn your hw1.py file, to include your work for this portion, put the code in an if __name__ == \"__main__\": clause. I’ll be able to see it but the grading scripts will ignore it when they import your code to use your functions."
+  },
+  {
+    "objectID": "posts/hw1/index.html#write-a-query-function",
+    "href": "posts/hw1/index.html#write-a-query-function",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "2. Write a Query Function",
+    "text": "2. Write a Query Function\nIn the hw1.py file, write a function called query_climate_database() which accepts five arguments:\n\ndb_file, the file name for the database\ncountry, a string giving the name of a country for which data should be returned.\nyear_begin and year_end, two integers giving the earliest and latest years for which should be returned (inclusive).\nmonth, an integer giving the month of the year for which should be returned.\n\nThe return value of query_climate_database() is a Pandas dataframe of temperature readings for the specified country, in the specified date range, in the specified month of the year. This dataframe should have the following columns, in this order:\n\nNAME: The station name.\nLATITUDE: The latitude of the station.\nLONGITUDE: The longitude of the station.\nCountry: The name of the country in which the station is located.\nYear: The year in which the reading was taken.\nMonth: The month in which the reading was taken.\nTemp: The average temperature at the specified station during the specified year and month. (Note: the temperatures in the raw data are already averages by month, so you don’t have to do any aggregation at this stage.)\n\nHint: Inside the function, you would want to put in the given variables (like year_begin) inside the query string (like SELECT ... FROM ... WHERE ...). While you can do this with string concatenation, injecting variables with the fancy Python f-strings will make your code look cleaner. Be careful not to forget quotation marks for the string variables.\nAs a test case, run this example and check if you get the correct result:\nquery_climate_database(db_file = \"your_database_file.db\",\n                       country = \"India\", \n                       year_begin = 1980, \n                       year_end = 2020,\n                       month = 1)\n\n\n\n\n\n\n\n\nNAME\n\n\nLATITUDE\n\n\nLONGITUDE\n\n\nCountry\n\n\nYear\n\n\nMonth\n\n\nTemp\n\n\n\n\n\n\n0\n\n\nAGARTALA\n\n\n23.883\n\n\n91.250\n\n\nIndia\n\n\n1980\n\n\n1\n\n\n18.21\n\n\n\n\n1\n\n\nAGARTALA\n\n\n23.883\n\n\n91.250\n\n\nIndia\n\n\n1981\n\n\n1\n\n\n18.25\n\n\n\n\n2\n\n\nAGARTALA\n\n\n23.883\n\n\n91.250\n\n\nIndia\n\n\n1982\n\n\n1\n\n\n19.31\n\n\n\n\n3\n\n\nAGARTALA\n\n\n23.883\n\n\n91.250\n\n\nIndia\n\n\n1985\n\n\n1\n\n\n19.25\n\n\n\n\n4\n\n\nAGARTALA\n\n\n23.883\n\n\n91.250\n\n\nIndia\n\n\n1988\n\n\n1\n\n\n19.54\n\n\n\n\n…\n\n\n…\n\n\n…\n\n\n…\n\n\n…\n\n\n…\n\n\n…\n\n\n…\n\n\n\n\n3115\n\n\nVISHAKHAPATNAM\n\n\n17.717\n\n\n83.233\n\n\nIndia\n\n\n2016\n\n\n1\n\n\n25.09\n\n\n\n\n3116\n\n\nVISHAKHAPATNAM\n\n\n17.717\n\n\n83.233\n\n\nIndia\n\n\n2017\n\n\n1\n\n\n23.90\n\n\n\n\n3117\n\n\nVISHAKHAPATNAM\n\n\n17.717\n\n\n83.233\n\n\nIndia\n\n\n2018\n\n\n1\n\n\n22.65\n\n\n\n\n3118\n\n\nVISHAKHAPATNAM\n\n\n17.717\n\n\n83.233\n\n\nIndia\n\n\n2019\n\n\n1\n\n\n22.20\n\n\n\n\n3119\n\n\nVISHAKHAPATNAM\n\n\n17.717\n\n\n83.233\n\n\nIndia\n\n\n2020\n\n\n1\n\n\n23.75\n\n\n\n\n\n3120 rows × 7 columns"
+  },
+  {
+    "objectID": "posts/hw1/index.html#write-a-geographic-scatter-function-for-yearly-temperature-increases",
+    "href": "posts/hw1/index.html#write-a-geographic-scatter-function-for-yearly-temperature-increases",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "3. Write a Geographic Scatter Function for Yearly Temperature Increases",
+    "text": "3. Write a Geographic Scatter Function for Yearly Temperature Increases\nIn this part, you will write a function to create visualizations that address the following question:\n\nHow does the average yearly change in temperature vary within a given country?\n\nWrite a function called temperature_coefficient_plot(). This function should accept six explicit arguments, and an undetermined number of keyword arguments.\n\ndb_file, country, year_begin, year_end, and month should be as in the previous part.\nmin_obs, the minimum required number of years of data for any given station. Only data for stations with at least min_obs years worth of data in the specified month should be plotted; the others should be filtered out. df.transform() plus filtering is a good way to achieve this task.\n**kwargs, additional keyword arguments passed to px.scatter_mapbox(). These can be used to control the colormap used, the mapbox style, etc.\n\nThe output of this function should be an interactive geographic scatterplot, constructed using Plotly Express, with a point for each station, such that the color of the point reflects an estimate of the yearly change in temperature during the specified month and time period at that station. A reasonable way to do this is to compute the first coefficient of a linear regression model at that station, as illustrated in the lecture where we used the .apply() method.\nFor example, after writing your function, you should be able to create a plot of estimated yearly increases in temperature during the month of January, in the interval 1980-2020, in India, as follows:\n# assumes you have imported necessary packages\ncolor_map = px.colors.diverging.RdGy_r # choose a colormap\n\nfig = temperature_coefficient_plot(\"India\", 1980, 2020, 1, \n                                   min_obs = 10,\n                                   zoom = 2,\n                                   mapbox_style=\"carto-positron\",\n                                   color_continuous_scale=color_map)\n\nfig.show()\n\n\nPlease pay attention to the following details:\n\nThe station name is shown when you hover over the corresponding point on the map.\nThe estimates shown in the hover are rounded to a sober number of significant figures.\nThe colorbar and overall plot have professional titles.\nThe colorbar is centered at 0, so that the “middle” of the colorbar (white, in this case) corresponds to a coefficient of 0.\n\nIt’s not necessary for your plot to look exactly like mine, but please attend to details such as these. Feel free to be creative about these labels, as well as the choice of colors, as long as your result is polished overall.\nYou are free (and indeed encouraged) to define additional functions as needed."
+  },
+  {
+    "objectID": "posts/hw1/index.html#create-two-more-interesting-figures-optional",
+    "href": "posts/hw1/index.html#create-two-more-interesting-figures-optional",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "4. Create Two More Interesting Figures (Optional)",
+    "text": "4. Create Two More Interesting Figures (Optional)\nCreate at least one more SQL query function in hw1.py and at least two more complex and interesting interactive data visualizations using the same data set. These plots must be of different types (e.g. line and bar, scatter and histogram, etc). The code to construct each visualization should be wrapped in functions, such that a user could create visualizations for different parts of the data by calling these functions with different arguments. At least one of these plots must involve multiple facets (i.e. multiple axes (in the sense of facets), each of which shows a subset of the data).\nAlongside the plots, you should clearly state a question that the plot addresses, similar to the question that we posed in Part 3. The questions for your two additional plots should be meaningfully different from each other and from the Part 3 question. You will likely want to define different query functions for extracting data for these new visualizations.\nIt is not necessary to create geographic plots for this part. Scatterplots, histograms, and line plots (among other choices) are all appropriate."
+  },
+  {
+    "objectID": "posts/hw1/index.html#submission",
+    "href": "posts/hw1/index.html#submission",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "Submission",
+    "text": "Submission\n\nPlease submit the file hw1.py with the relevant functions to Gradescope. Any other serial code should in a if __name__ == \"__main__\": clause.\nSubmit your plots: hw1_plot_1.html and hw1_plot_2.html or a link to a blog post (optional) in a README.txt."
+  },
+  {
+    "objectID": "posts/hw1/index.html#grading",
+    "href": "posts/hw1/index.html#grading",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "Grading",
+    "text": "Grading\n\n(+2 points) Please follow the “Submission” section above.\n(+2 points) The query_climate_database() function is defined with the correct parameters according to the prompt. (+2 points) The column names of the data frames should match exactly as well.\n(+2 points) You get the dataframe shown above for the 1980-2020 India example with 3152 rows and appropriate columns.* Put the code for calling this function in a if __name__ == \"__main__\": clause.\n(+2 points) The temperature_coefficient_plot() function is defined with the correct parameters according to the prompt.\n(+4 points) Create two geographic scatterplots, one for 1980-2020 India that looks similar to the provided example, and another one for a different time and/or country. Write these to HTML files: hw1_plot_1.html and hw1_plot_2.html and submit them with hw1.py.* Put the code for the function calls in a if __name__ == \"__main__\": clause. The only bits of code outside these if statements are function definition.\n(+6 points) The geographic scatterplots are correctly constructed and professionally labeled, including a title, hovers with rounded estimates, and a correctly centered colorbar."
+  },
+  {
+    "objectID": "posts/hw1/index.html#create-a-homework-1-post-optional",
+    "href": "posts/hw1/index.html#create-a-homework-1-post-optional",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "Create a Homework 1 Post (Optional)*",
+    "text": "Create a Homework 1 Post (Optional)*\nCreate a post to display your dataframe and plots.\nYou should load the query_climate_database() function and show its content in your blog:\nfrom climate_database import query_climate_database\nimport inspect\nprint(inspect.getsource(query_climate_database))\nTo properly show figures in your blog, the most reliable way is to set your plotly renderer to iframe. To do so, run the following near the top of your notebook:\nimport plotly.io as pio\npio.renderers.default=\"iframe\"\nThis will generate a folder called iframe_figures/ inside the folder where your notebook is located. In order to have the figures show up in your blog, you should keep this folder along with the Jupyter Notebook in your post folder."
+  },
+  {
+    "objectID": "posts/hw1/index.html#style-and-code-reminders",
+    "href": "posts/hw1/index.html#style-and-code-reminders",
+    "title": "Homework 1: Data Wrangling and Visualization",
+    "section": "Style and code reminders",
+    "text": "Style and code reminders\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define.\n\nPlease show the content of the functions you defined in a separate python file using inspect.getsource()."
+  },
+  {
     "objectID": "posts/hw0/index.html",
     "href": "posts/hw0/index.html",
     "title": "Homework 0",
@@ -109,6 +179,6 @@
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]
