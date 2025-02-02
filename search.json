@@ -123,7 +123,7 @@
     "href": "posts/hw1/index.html#style-and-code-reminders",
     "title": "Homework 1: Data Wrangling and Visualization",
     "section": "Style and code reminders",
-    "text": "Style and code reminders\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define.\n\nPlease show the content of the functions you defined in a separate python file using inspect.getsource()."
+    "text": "Style and code reminders\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define.\n\nPlease show the content of the functions you defined in a separate python file using inspect.getsource() if you are doing the optional blog post."
   },
   {
     "objectID": "posts/hw0/index.html",
