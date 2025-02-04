@@ -126,6 +126,69 @@
     "text": "Style and code reminders\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define.\n\nPlease show the content of the functions you defined in a separate python file using inspect.getsource() if you are doing the optional blog post."
   },
   {
+    "objectID": "posts/hw2/index.html",
+    "href": "posts/hw2/index.html",
+    "title": "Homework 2: Web Scraping",
+    "section": "",
+    "text": "What’s your favorite movie? Wouldn’t it be nice to find more shows that you might like to watch, based on ones you know you like? Tools that address questions like this are often called “recommender systems.” Powerful, scalable recommender systems are behind many modern entertainment and streaming services, such as Netflix and Spotify. While most recommender systems these days involve machine learning, there are also ways to make recommendations that don’t require such complex tools.\nIn this assignment, you’ll use webscraping to answer the following question:\nThe idea of this question is that, if TV show Y has many of the same actors as TV show X, and you like X, you might also enjoy Y.\nThis assignment has two parts. In the first, larger part, you’ll write a webscraper for finding shared actors on TMDB. In the second, smaller part, you’ll use the results from your scraper to make recommendations."
+  },
+  {
+    "objectID": "posts/hw2/index.html#setup",
+    "href": "posts/hw2/index.html#setup",
+    "title": "Homework 2: Web Scraping",
+    "section": "1. Setup",
+    "text": "1. Setup\n\n1.1. Locate the Starting TMDB Page\nPick your favorite movie, and locate its TMDB page by searching on https://www.themoviedb.org/.\nFor example, my favorite movie is The Triplets of Belleville.\nLet’s look at another you might be more familiar with: Harry Potter and the Philosopher’s Stone.\nIts TMDB page is at:\nhttps://www.themoviedb.org/movie/671-harry-potter-and-the-philosopher-s-stone/\nSave this URL for a moment.\n\n\n1.2. Dry-Run Navigation\nNow, we’re just going to practice clicking through the navigation steps that our scraper will take.\nFirst, click on the Full Cast & Crew link. This will take you to a page with URL of the form\n&lt;original_url&gt;cast/\nNext, scroll until you see the Cast section. Click on the portrait of one of the actors. This will take you to a page with a different-looking URL. For example, the URL for Alan Rickman, who played Severus Snape, is\nhttps://www.themoviedb.org/person/4566-alan-rickman\nFinally, scroll down until you see the actor’s Acting section. Note the titles of a few movies and TV shows in this section.\nOur scraper is going to replicate this process. Starting with your favorite movie, it’s going to look at all the actors in that movie, and then log all the other movies or TV shows that they worked on.\nAt this point, it would be a good idea for you to use the Developer Tools on your browser to inspect individual HTML elements and look for patterns among the names you are looking for.\n\n\n1.3. Initialize Your Project\n\nOpen a terminal and type:\n\nconda activate PIC16B-24F\nscrapy startproject TMDB_scraper\ncd TMDB_scraper\nThis will create quite a lot of files, but you don’t really need to touch most of them. However, you must submit the entire TMDB_scraper folder.\n\n\n1.4. Tweak Settings\nFor now, add the following line to the file settings.py:\nCLOSESPIDER_PAGECOUNT = 20\nThis line just prevents your scraper from downloading too much data while you’re still testing things out. You’ll remove this line later.\nHint: Later on, you may run into 403 Forbidden errors once the website detects that you’re a bot. See these links (link1, link2, link3, link4) for how to work around that issue. The easiest solution is changing one line in setting.py. You might see this when you run scrapy shell as well, so keep an eye out for 403! Remember, you want your status to be 200 OK. If they know that you are on Python, they will certainly try to block you. One way to change user agent on scrapy shell is:\nscrapy shell -s USER_AGENT='Scrapy/2.8.0 (+https://scrapy.org)' https://www.themoviedb.org/...\n(this user agent is the default one that might be blocked by TMDB, and one agent that wouldn’t be blocked is in the lecture note)"
+  },
+  {
+    "objectID": "posts/hw2/index.html#write-your-scraper",
+    "href": "posts/hw2/index.html#write-your-scraper",
+    "title": "Homework 2: Web Scraping",
+    "section": "2. Write Your Scraper",
+    "text": "2. Write Your Scraper\nCreate a file inside the spiders directory called tmdb_spider.py. Add the following lines to the file:\n# to run \n# scrapy crawl tmdb_spider -o movies.csv -a subdir=671-harry-potter-and-the-philosopher-s-stone\n\nimport scrapy\n\nclass TmdbSpider(scrapy.Spider):\n    name = 'tmdb_spider'\n    def __init__(self, subdir=\"\", *args, **kwargs):\n        self.start_urls = [f\"https://www.themoviedb.org/movie/{subdir}/\"]\nThen, you will be able to run your completed spider for a movie of your choice by giving its subdirectory on TMDB website as an extra command-line argument.\nNow, implement three parsing methods for the TmdbSpider class.\n\nparse(self, response) should assume that you start on a movie page, and then navigate to the Full Cast & Crew page. Remember that this page has url &lt;movie_url&gt;cast. (You are allowed to hardcode that part.) Once there, the parse_full_credits(self,response) should be called, by specifying this method in the callback argument to a yielded scrapy.Request. The parse() method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.\nparse_full_credits(self, response) should assume that you start on the Full Cast & Crew page. Its purpose is to yield a scrapy.Request for the page of each actor listed on the page. Crew members are not included. The yielded request should specify the method parse_actor_page(self, response) should be called when the actor’s page is reached. The parse_full_credits() method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.\nparse_actor_page(self, response) should assume that you start on the page of an actor. It should yield a dictionary with two key-value pairs, of the form {\"actor\" : actor_name, \"movie_or_TV_name\" : movie_or_TV_name}. The method should yield one such dictionary for each of the movies or TV shows on which that actor has worked in an “Acting” role1. Note that you will need to determine both the name of the actor and the name of each movie or TV show. Please remove duplicate titles within each actor’s work. This method should be no more than 15 lines of code, excluding comments and docstrings.\n\nProvided that these methods are correctly implemented, you can run the command\nscrapy crawl tmdb_spider -o results.csv -a subdir=671-harry-potter-and-the-philosopher-s-stone\nto create a .csv file with a column for actors and a column for movies or TV shows for Harry Potter and the Philosopher’s Stone.\nExperimentation in the scrapy shell is strongly recommended. Make sure to check the following: - parse_actor_page() - only parses all the works under the “Acting” section - even if “Acting” is not on the top of the lists - don’t yield duplicate work names within each actor - parse_full_credits() - is parsing all the actors, - is not parsing crew members, - does not parse duplicate pages, and - of course, if the results are correct.\n\nChallenge\nIf you’re looking for a challenge, think about ways that may make your recommendations more accurate. Consider scraping the number of episodes as well or limiting the number of actors you get per show to make sure you only get the main series cast."
+  },
+  {
+    "objectID": "posts/hw2/index.html#make-your-recommendations",
+    "href": "posts/hw2/index.html#make-your-recommendations",
+    "title": "Homework 2: Web Scraping",
+    "section": "3. Make Your Recommendations",
+    "text": "3. Make Your Recommendations\nOnce your spider is fully written, comment out the line\nCLOSESPIDER_PAGECOUNT = 20\nin the settings.py file. Then, the command\nscrapy crawl tmdb_spider -o results.csv -a subdir=671-harry-potter-and-the-philosopher-s-stone\nwill run your spider and save a CSV file called results.csv, with columns for actor names and the movies and TV shows on which they featured in.\nOnce you’re happy with the operation of your spider, compute a sorted list with the top movies and TV shows that share actors with your favorite movie or TV show. For example, it may have two columns: one for “movie names” and “number of shared actors”.\nFeel free to be creative. You can show a pandas data frame, a chart using matplotlib or plotly, or any other sensible display of the results."
+  },
+  {
+    "objectID": "posts/hw2/index.html#blog-post-report",
+    "href": "posts/hw2/index.html#blog-post-report",
+    "title": "Homework 2: Web Scraping",
+    "section": "4. Blog Post / Report",
+    "text": "4. Blog Post / Report\nIn either a blog post or a ipynb saved as a pdf, you should describe how your scraper works, as well as the results of your analysis. When describing your scraper, I recommend dividing it up into the three distinct parsing methods, and discussing them one-by-one. For example:\n\nIn this blog post, I’m going to make a super cool web scraper… Here’s how we set up the project…\n&lt;implementation of parse()&gt;\nThis method works by…\n\n\n&lt;implementation of parse_full_credits()&gt;\nTo write this method, I…\n\nIn addition to describing your scraper, your report should include a table or visualization of numbers of shared actors.\nUse markdown (rather than #comments) to guide your reader through the process of setting up and running the scraper. Include how to create the project and run the scraper."
+  },
+  {
+    "objectID": "posts/hw2/index.html#submission",
+    "href": "posts/hw2/index.html#submission",
+    "title": "Homework 2: Web Scraping",
+    "section": "Submission",
+    "text": "Submission\n\nTo Gradescope, please submit the the entire TMDB_scraper/ folder, a README.txt with the link to your blog post or a hw2.pdf of your report, and either a hw2.ipynb or hw2.py with any work done outside of TMDB_scraper/."
+  },
+  {
+    "objectID": "posts/hw2/index.html#grading",
+    "href": "posts/hw2/index.html#grading",
+    "title": "Homework 2: Web Scraping",
+    "section": "Grading",
+    "text": "Grading\n\n(+2 points) You followed “Submission” section above.\n(+3 points) Each of the three parsing methods are correctly implemented.\n(+1 points) parse() is implemented in no more than 5 lines.\n(+1 points)parse_full_credits() is implemented in no more than 5 lines.\n(+1 points) parse_actor_page() is implemented in no more than 15 lines.\n(+2 points) A table or list of results or pandas dataframe is shown.\n(+2 points) A visualization with matplotlib, plotly, or seaborn is shown.\n(+2 points) The report explains clearly how to set up the project, run the scraper, and access the results.\n(+3 points) The report explains how each of the three parse methods works.\n(+3 points) The report is written in tutorial format, in engaging and clear English. Grammar and spelling errors are acceptable within reason."
+  },
+  {
+    "objectID": "posts/hw2/index.html#style-and-code-reminders",
+    "href": "posts/hw2/index.html#style-and-code-reminders",
+    "title": "Homework 2: Web Scraping",
+    "section": "Style and code reminders",
+    "text": "Style and code reminders\n\nEach of the three parse methods has a short docstring describing its assumptions (e.g. what kind of page it is meant to parse) and its effect, including navigation and data outputs.\nEach of the three parse methods has helpful comments for understanding how each chunk of code operates."
+  },
+  {
+    "objectID": "posts/hw2/index.html#footnotes",
+    "href": "posts/hw2/index.html#footnotes",
+    "title": "Homework 2: Web Scraping",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nOnly the works listed in “Acting” section of the actor page. Keep in mind that “Acting” might not be on the top of their lists; for example, David Holmes is credited with an acting role in HP1, but spent most of his career as a stunt double of Daniel Radcliffe (as a part of Crew). On his page, you will see “Crew” before “Acting”.↩︎"
+  },
+  {
     "objectID": "posts/hw0/index.html",
     "href": "posts/hw0/index.html",
     "title": "Homework 0",
@@ -179,6 +242,6 @@
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]
