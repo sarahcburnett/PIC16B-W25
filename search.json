@@ -189,6 +189,41 @@
     "text": "Footnotes\n\n\nOnly the works listed in “Acting” section of the actor page. Keep in mind that “Acting” might not be on the top of their lists; for example, David Holmes is credited with an acting role in HP1, but spent most of his career as a stunt double of Daniel Radcliffe (as a part of Crew). On his page, you will see “Crew” before “Acting”.↩︎"
   },
   {
+    "objectID": "posts/hw3/index.html",
+    "href": "posts/hw3/index.html",
+    "title": "Homework 3: Web Development",
+    "section": "",
+    "text": "In this assignment, you will create a dynamic product page using Flask, SQLite3, and Jinja.\nTo complete this task, you will need the following skills:"
+  },
+  {
+    "objectID": "posts/hw3/index.html#overview",
+    "href": "posts/hw3/index.html#overview",
+    "title": "Homework 3: Web Development",
+    "section": "Overview",
+    "text": "Overview\nYou have been hired by a company to build a webpage to sell knitted items. The previous web programmer has abandoned the project, traveled back to their home planet, and cannot be contacted. Looking at what they started, it seems they were attempting to create a static page using HTML. Currently the page doesn’t function well. Clicking on any image goes to the same product page. Also, the price on the page is outdated already. No good.\nYour job is to keep the website updated with a database that has been given to you. You want to set this up so that you don’t have to manually update the page by copying and pasting data into the HTML each time. You have better things to do. You will generate a dynamic webpage that will update with information from a sqlite3 database. It will also update the database when a purchase has been made."
+  },
+  {
+    "objectID": "posts/hw3/index.html#instructions",
+    "href": "posts/hw3/index.html#instructions",
+    "title": "Homework 3: Web Development",
+    "section": "Instructions",
+    "text": "Instructions\n\nSetup\nStart by reviewing the current page. I suggest using Sublime Text or VScode so you can see the files available. Run app.py in your conda virtual environment.\nLayout\nLet’s start code decluttering. Create a layout.html to be a template for the pages. Using HTML and Jinja, remove some code that appears on both home.html and product.html such as header, head, footer, etc. and have it in layout.html only.\nDatabase\nIncorporate the information from the database into the solution. This will require you to unpack the information from the database and put it into some container. I suggest you write this as a function to call whenever you need to get fresh info from the database.\nPython data to HTML\nPass the data to the python templates. You will also have to prepare the data so you can use it on the HTML page. Keep in mind you can use python in Jinja but the syntax is limited. For example, you won’t be able to pass a pandas dataframe to a Jinja placeholder. One approach is to use zip() to prepare your data as a list of tuples to iterate through. You can also pass multiple things through render_template. For example, render_template(\"index.html\",jinjaph=pythonvar,jinjaph2=pythonvar2) Once you’re done, clicking an image should take users to the corresponding product page.\nMake a purchase button\nBeneath the description on the product page, add form with a button that says “Purchase”. You want to send along the information of the ID to the homepage when the button is clicked. To do this, nested in the &lt;form&gt; add an &lt;input&gt; with the atrribute type=hidden. Give it a name attribute set to whatever you’d like and the value attribute should be the ID of the product of the page you’re looking at. The form should direct to the home page and use another method that’s more secure than the GET. We don’t want people to be able to type something in the URL and have a purchase happen. Similarily, we don’t want scrapy spiders to be able to make purchases by going to URLs in their usually way.\nMake a purchase permanent\nAdd some code to app.py to handle a purchase being made. It should take the productID and use that to remove the record of the product from the database. After making a purchase, you should then see the home page with the current inventory.\nValidate your HTML\nIn order to ensure the website looks good on all browser and not just the very nice ones like Google Chrome, you should validate your pages. Go to your home page (and later one of the product pages). Open the source file (in Chrome, it’s View&gt;Developer&gt;View Source. Open this page for universal HTML validator.\nYou can directly input the code by copying and pasting. If you modified the previous code from the alien, you should see an error about the &lt;p&gt; element not belonging as a child of &lt;button&gt;. Change the nested &lt;p&gt; element in your code to a &lt;span&gt; to address this error. Fix any other Errors and Warnings. Info is fine.\nStyling (Optional)\nYou can either create your own database or use the provided knitted goods dataset. Additionally, you should style your app to look attractive and interesting! I encourage you to get creative on this."
+  },
+  {
+    "objectID": "posts/hw3/index.html#submission",
+    "href": "posts/hw3/index.html#submission",
+    "title": "Homework 3: Web Development",
+    "section": "Submission",
+    "text": "Submission\n\nTo Gradescope, please submit product.html, layout.html, home.html, app.py. Optionally, you can submit style.css or products.db if you added anything."
+  },
+  {
+    "objectID": "posts/hw3/index.html#grading",
+    "href": "posts/hw3/index.html#grading",
+    "title": "Homework 3: Web Development",
+    "section": "Grading",
+    "text": "Grading\n\n(+2) You include a layout.html, ensuring all redundant code is removed from home.html and product.html.\n(+1) Your website loads data from a database named products.db. The rows may change, but the columns will always be ProductID, Title, Price, Description, ImageLink.\n(+1) You close any resources you open.\n(+3) On the home page, products are displayed using data from the database.\n(+1) Clicking on an image directs the user to the corresponding product page.\n(+3) The product page dynamically displays product information (using the database).\n(+2) A purchase button is implemented as described.\n(+1) The correct HTTP method is used for making a purchase.\n(+2) Purchases are made permanent by modifying the database.\n(+2) After making a purchase, the user is redirected to the homepage with the updated inventory.\n(+1) product.html and home.html are neat and compact. All HTML files are no more than 25 lines and readable.\n(+1) Your HTML code is validated."
+  },
+  {
     "objectID": "posts/hw0/index.html",
     "href": "posts/hw0/index.html",
     "title": "Homework 0",
@@ -242,6 +277,6 @@
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 3: Web Development\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]

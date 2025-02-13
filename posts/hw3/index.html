@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-02-13">
 
-<title>UCLA PIC 16B Lec 2, Winter 2025</title>
+<title>Homework 3: Web Development – UCLA PIC 16B Lec 2, Winter 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-407a182a36860c9c68c0913c6172c981.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-407a182a36860c9c68c0913c6172c981.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +67,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +79,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">UCLA PIC 16B Lec 2, Winter 2025</span>
     </a>
   </div>
@@ -149,7 +90,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -172,219 +113,112 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">UCLA PIC 16B Lec 2, Winter 2025</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Homework 3: Web Development</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Homework</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 13, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="SG9tZXdvcms=">Homework <span class="quarto-category-count">(4)</span></div><div class="category" data-category="V2VlayUyMDM=">Week 3 <span class="quarto-category-count">(1)</span></div></div></div>
-<!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
-
-
-
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  </ul>
+</nav>
     </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="SG9tZXdvcms=" data-listing-date-sort="1739433600000" data-listing-file-modified-sort="1739488889562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1007">
-<div class="thumbnail">
-<p><a href="./posts/hw3/index.html" class="no-external"></a></p><a href="./posts/hw3/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw3/shopping.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw3/index.html" class="no-external">Homework 3: Web Development</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw3/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw3/index.html" class="no-external">In this assignment, you will create a dynamic product page using Flask, SQLite3, and Jinja.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw3/index.html" class="no-external">
-<div class="listing-date">
-Feb 13, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="SG9tZXdvcms=" data-listing-date-sort="1738656000000" data-listing-file-modified-sort="1738694218591" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1678">
-<div class="thumbnail">
-<p><a href="./posts/hw2/index.html" class="no-external"></a></p><a href="./posts/hw2/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw2/spider.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw2/index.html" class="no-external">Homework 2: Web Scraping</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw2/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw2/index.html" class="no-external">What’s your favorite movie? Wouldn’t it be nice to find more shows that you might like to watch, based on ones you know you like? Tools that address questions like this are…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw2/index.html" class="no-external">
-<div class="listing-date">
-Feb 4, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="SG9tZXdvcms=" data-listing-date-sort="1737964800000" data-listing-file-modified-sort="1738535796569" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1780">
-<div class="thumbnail">
-<p><a href="./posts/hw1/index.html" class="no-external"></a></p><a href="./posts/hw1/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw1/temperature.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw1/index.html" class="no-external">Homework 1: Data Wrangling and Visualization</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw1/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw1/index.html" class="no-external">In this assignment, you’ll create several interesting, interactive data graphics using the NOAA climate data that we’ve explored in the first several weeks of lectures.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw1/index.html" class="no-external">
-<div class="listing-date">
-Jan 27, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="SG9tZXdvcms=" data-listing-date-sort="1737446400000" data-listing-file-modified-sort="1737502798761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="537">
-<div class="thumbnail">
-<p><a href="./posts/hw0/index.html" class="no-external"></a></p><a href="./posts/hw0/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw0/penguin.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw0/index.html" class="no-external">Homework 0</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw0/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw0/index.html" class="no-external">In this blog post assignment, you’ll create a short post for your new website. The primary purpose is to give you some practice working with Quarto blogging with Python code.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw0/index.html" class="no-external">
-<div class="listing-date">
-Jan 21, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="V2VlayUyMDM=" data-listing-date-sort="1737446400000" data-listing-file-modified-sort="1737501228248" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="503">
-<div class="thumbnail">
-<p><a href="./posts/composing/index.html" class="no-external"></a></p><a href="./posts/composing/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/composing/index_files/figure-html/cell-3-output-1.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/composing/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/composing/index.html" class="no-external">Creating Posts</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/composing/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDM='); return false;">
-Week 3
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/composing/index.html" class="no-external">How to create technical posts that include Python code, explanatory text, and notes.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/composing/index.html" class="no-external">
-<div class="listing-date">
-Jan 21, 2025
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In this assignment, you will create a dynamic product page using Flask, SQLite3, and Jinja.</p>
+<p>To complete this task, you will need the following skills:</p>
+<ol type="1">
+<li>Flask Basics – Setting up a Flask app, routing, layouts, and rendering templates with Jinja.</li>
+<li>Database Management – Accessing and querying an SQLite3 database, and displaying results dynamically using Jinja.</li>
+<li>HTML &amp; CSS (Optional) – Structuring content and styling your product page for a polished look.</li>
+</ol>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>You have been hired by a company to build a webpage to sell knitted items. The previous web programmer has abandoned the project, traveled back to their home planet, and cannot be contacted. Looking at what they started, it seems they were attempting to create a static page using HTML. Currently the page doesn’t function well. Clicking on any image goes to the same product page. Also, the price on the page is outdated already. No good.</p>
+<p>Your job is to keep the website updated with a database that has been given to you. You want to set this up so that you don’t have to manually update the page by copying and pasting data into the HTML each time. You have better things to do. You will generate a dynamic webpage that will update with information from a <code>sqlite3</code> database. It will also update the database when a purchase has been made.</p>
+</section>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol start="0" type="1">
+<li><p><em>Setup</em></p>
+<p>Start by reviewing the current page. I suggest using Sublime Text or VScode so you can see the files available. Run <code>app.py</code> in your conda virtual environment.</p></li>
+<li><p><em>Layout</em></p>
+<p>Let’s start code decluttering. Create a <code>layout.html</code> to be a template for the pages. Using HTML and Jinja, remove some code that appears on both <code>home.html</code> and <code>product.html</code> such as <code>header</code>, <code>head</code>, <code>footer</code>, etc. and have it in <code>layout.html</code> only.</p></li>
+<li><p><em>Database</em></p>
+<p>Incorporate the information from the database into the solution. This will require you to unpack the information from the database and put it into some container. I suggest you write this as a function to call whenever you need to get fresh info from the database.</p></li>
+<li><p><em>Python data to HTML</em></p>
+<p>Pass the data to the python templates. You will also have to prepare the data so you can use it on the HTML page. Keep in mind you can use python in Jinja but the syntax is limited. For example, you won’t be able to pass a pandas dataframe to a Jinja placeholder. One approach is to use <a href="https://www.geeksforgeeks.org/zip-in-python/" target="_blank"><code>zip()</code></a> to prepare your data as a list of tuples to iterate through. You can also pass multiple things through <code>render_template</code>. For example, <code>render_template("index.html",jinjaph=pythonvar,jinjaph2=pythonvar2)</code> Once you’re done, clicking an image should take users to the corresponding product page.</p></li>
+<li><p><em>Make a purchase button</em></p>
+<p>Beneath the description on the product page, add form with a button that says “Purchase”. You want to send along the information of the ID to the homepage when the button is clicked. To do this, nested in the <code>&lt;form&gt;</code> add an <code>&lt;input&gt;</code> with the atrribute <code>type=hidden</code>. Give it a <code>name</code> attribute set to whatever you’d like and the <code>value</code> attribute should be the ID of the product of the page you’re looking at. The form should direct to the home page and use another method that’s more secure than the GET. We don’t want people to be able to type something in the URL and have a purchase happen. Similarily, we don’t want scrapy spiders to be able to make purchases by going to URLs in their usually way.</p></li>
+<li><p><em>Make a purchase permanent</em></p>
+<p>Add some code to <code>app.py</code> to handle a purchase being made. It should take the <code>productID</code> and use that to remove the record of the product from the database. After making a purchase, you should then see the home page with the current inventory.</p></li>
+<li><p><em>Validate your HTML</em></p>
+<p>In order to ensure the website looks good on all browser and not just the very nice ones like Google Chrome, you should validate your pages. Go to your home page (and later one of the product pages). Open the source file (in Chrome, it’s View&gt;Developer&gt;View Source. Open this page for <a href="https://validator.w3.org/#validate_by_input" target="_blank">universal HTML validator</a>.</p>
+<p>You can directly input the code by copying and pasting. If you modified the previous code from the alien, you should see an error about the <code>&lt;p&gt;</code> element not belonging as a child of <code>&lt;button&gt;</code>. Change the nested <code>&lt;p&gt;</code> element in your code to a <code>&lt;span&gt;</code> to address this error. Fix any other Errors and Warnings. Info is fine.</p></li>
+<li><p><em>Styling</em> (Optional)</p>
+<p>You can either create your own database or use the provided knitted goods dataset. Additionally, you should style your app to look attractive and interesting! I encourage you to get creative on this.</p></li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<ul>
+<li>To Gradescope, please submit <code>product.html</code>, <code>layout.html</code>, <code>home.html</code>, <code>app.py</code>. Optionally, you can submit <code>style.css</code> or <code>products.db</code> if you added anything.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>(+2)</strong> You include a <code>layout.html</code>, ensuring all redundant code is removed from <code>home.html</code> and <code>product.html</code>.</li>
+<li><strong>(+1)</strong> Your website loads data from a database named <code>products.db</code>. The rows may change, but the columns will always be <code>ProductID, Title, Price, Description, ImageLink</code>.</li>
+<li><strong>(+1)</strong> You close any resources you open.</li>
+<li><strong>(+3)</strong> On the home page, products are displayed using data from the database.</li>
+<li><strong>(+1)</strong> Clicking on an image directs the user to the corresponding product page.</li>
+<li><strong>(+3)</strong> The product page dynamically displays product information (using the database).</li>
+<li><strong>(+2)</strong> A purchase button is implemented as described.</li>
+<li><strong>(+1)</strong> The correct HTTP method is used for making a purchase.</li>
+<li><strong>(+2)</strong> Purchases are made permanent by modifying the database.</li>
+<li><strong>(+2)</strong> After making a purchase, the user is redirected to the homepage with the updated inventory.</li>
+<li><strong>(+1)</strong> <code>product.html</code> and <code>home.html</code> are neat and compact. All HTML files are no more than 25 lines and readable.</li>
+<li><strong>(+1)</strong> Your HTML code is validated.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
