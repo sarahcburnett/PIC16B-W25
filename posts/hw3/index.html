@@ -178,6 +178,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p><em>Layout</em></p>
 <p>Let’s start code decluttering. Create a <code>layout.html</code> to be a template for the pages. Using HTML and Jinja, remove some code that appears on both <code>home.html</code> and <code>product.html</code> such as <code>header</code>, <code>head</code>, <code>footer</code>, etc. and have it in <code>layout.html</code> only.</p></li>
 <li><p><em>Database</em></p>
+<p>Here’s a query of the sqlite3 database:</p>
+<p><img src="database.png" class="img-fluid"></p>
 <p>Incorporate the information from the database into the solution. This will require you to unpack the information from the database and put it into some container. I suggest you write this as a function to call whenever you need to get fresh info from the database.</p></li>
 <li><p><em>Python data to HTML</em></p>
 <p>Pass the data to the python templates. You will also have to prepare the data so you can use it on the HTML page. Keep in mind you can use python in Jinja but the syntax is limited. For example, you won’t be able to pass a pandas dataframe to a Jinja placeholder. One approach is to use <a href="https://www.geeksforgeeks.org/zip-in-python/" target="_blank"><code>zip()</code></a> to prepare your data as a list of tuples to iterate through. You can also pass multiple things through <code>render_template</code>. For example, <code>render_template("index.html",jinjaph=pythonvar,jinjaph2=pythonvar2)</code> Once you’re done, clicking an image should take users to the corresponding product page.</p></li>
