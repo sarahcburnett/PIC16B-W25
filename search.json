@@ -126,83 +126,6 @@
     "text": "Style and code reminders\n\nRepeated operations should be enclosed in functions.\nFor-loops are minimized by making full use of vectorized operations for Numpy arrays and Pandas data frames.\nHelpful comments are supplied throughout the code. Docstrings are supplied for any functions and classes you define.\n\nPlease show the content of the functions you defined in a separate python file using inspect.getsource() if you are doing the optional blog post."
   },
   {
-    "objectID": "posts/hw4/index.html",
-    "href": "posts/hw4/index.html",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "",
-    "text": "In this blog assignment, you will conduct a simulation of two-dimensional heat diffusion in various ways.\nIn the lecture notes, we represented the steps to simulate one-dimensional heat diffusion as a sequence of matrix-vector multiplications. Let’s expand it to two dimensions.\nIn two-dimensions, the heat equation reads: \\[\\frac{\\partial f(x, t)}{\\partial t} = \\frac{\\partial^2 f}{\\partial x^2 } + \\frac{\\partial^2 f}{\\partial y^2 }\\;.\\] Using a similar discretization scheme as in the one-dimensional case, let’s put: \\[\nx_i = i \\Delta x,\\;\\; y_j = j \\Delta y,\\;\\; t_k = k \\Delta t,\n\\] for \\(i = 0, \\cdots, N-1\\); \\(j = 0, \\cdots, N-1\\); and \\(k = 0, 1, 2 \\cdots\\).\nWhen we define \\(u_{i, j}^k = f(x_i, y_j, t_k)\\), the update equation in discrete time can be represented as: \\[\nu_{i, j}^{k+1} \\approx u_{i, j}^k + \\epsilon \\left(u_{i+1, j}^k  + u_{i-1, j}^k + u_{i, j+1}^k + u_{i, j-1}^k - 4 u_{i, j}^k\\right),\n\\] where \\(\\epsilon\\) is a small parameter. The boundary condition can be constructed to allow heat to escape, as follows: \\[\nu_{-1, j}^k = u_{N, j}^k = u_{i, -1}^k = u_{i, N}^k = 0.\n\\] We are not explicitly allocating space for \\(u_{-1, j}^k\\), \\(u_{N, j}^k\\), \\(u_{i, -1}^k\\), or \\(u_{i, N}^k\\). (Note: the index -1 here does not mean the last index as in Python indexing; it just means \\(x = - \\Delta x\\) or \\(y = - \\Delta y\\).)\nFor this homework, we will use:\nN = 101\nepsilon = 0.2\nand we will use a similar initial condition as in the 1D case: putting 1 unit of heat at the midpoint.\nimport numpy as np\nfrom matplotlib import pyplot as plt\n# construct initial condition: 1 unit of heat at midpoint. \nu0 = np.zeros((N, N))\nu0[int(N/2), int(N/2)] = 1.0\nplt.imshow(u0)"
-  },
-  {
-    "objectID": "posts/hw4/index.html#with-matrix-multiplication",
-    "href": "posts/hw4/index.html#with-matrix-multiplication",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "1. With matrix multiplication",
-    "text": "1. With matrix multiplication\nAs in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by flattening the current solution \\(u_{i, j}^k\\). Each iteration of the update is given by: (EDITED 2/20)\ndef advance_time_matvecmul(A, u, epsilon):\n    \"\"\"Advances the simulation by one timestep, via matrix-vector multiplication\n    Args:\n        A: The 2d finite difference matrix, N^2 x N^2. \n        u: N x N grid state at timestep k.\n        epsilon: stability constant.\n\n    Returns:\n        N x N Grid state at timestep k+1.\n    \"\"\"\n    N = u.shape[0]\n    u = u + epsilon * (A @ u.flatten()).reshape((N, N))\n    return u\nThat is, we view \\(u_{i, j}^k\\) as the element with index \\(N \\times i + j\\) in a vector of length \\(N^2\\). Put this function in the file heat_equation.py. Let’s follow the indexing used in the update equation above. The matrix A has the size of \\(N^2 \\times N^2\\), without all-zero rows or all-zero columns. The corresponding matrix A is given by:\nn = N * N\ndiagonals = [-4 * np.ones(n), np.ones(n-1), np.ones(n-1), np.ones(n-N), np.ones(n-N)]\ndiagonals[1][(N-1)::N] = 0\ndiagonals[2][(N-1)::N] = 0\nA = np.diag(diagonals[0]) + np.diag(diagonals[1], 1) + np.diag(diagonals[2], -1) + np.diag(diagonals[3], N) + np.diag(diagonals[4], -N)\nDefine a function get_A(N), that takes the value N as the argument and returns the corresponding matrix A in heat_equation.py.\nLet’s run the simulation with get_A() and advance_time_matvecmul() we defined. Run the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations. Since our grading is PDF-based, please use a 3x3 grid of 2D heatmaps or contour plots. You are welcome to create an animation later. Since we want to compare computation time between multiple methods, we should not count the time needed for visualization. Thus, we need to store the intermediate solutions in a separate array.\nAt the end of the run, your solution should be symmetric and invariant under 90-degree rotations. It should look like:\n\nbut not like:"
-  },
-  {
-    "objectID": "posts/hw4/index.html#sparse-matrix-in-jax",
-    "href": "posts/hw4/index.html#sparse-matrix-in-jax",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "2. Sparse matrix in JAX",
-    "text": "2. Sparse matrix in JAX\nIn fact, the performance of Part 1 is supposed to be excruciatingly slow. While we can use the underlying optimized matrix multiplication routine from BLAS (basic linear algebra subprograms), it is not particularly effective here, as the matrix A has less than \\(5N^2\\) nonzero elements out of \\(N^4\\) elements. Most of operations are wasted for computing zeros. Let’s use the data structure that exploits a lot of zeros in the matrix A: sparse matrix data structures. The JAX package holds an experimental sparse matrix support. We can use the batched coordinate (BCOO) format to only use \\(O(N^2)\\) space for the matrix, and only take \\(O(N^2)\\) time for each update.1\nLet’s define the function get_sparse_A(N), a function that returns A_sp_matrix, the matrix A in a sparse format, given N in heat_equation.py. Repeat Part 1 using get_A_sparse() and the jit-ed version of advance_time_matvecmul.\nRun the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations."
-  },
-  {
-    "objectID": "posts/hw4/index.html#direct-operation-with-numpy",
-    "href": "posts/hw4/index.html#direct-operation-with-numpy",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "3. Direct operation with numpy",
-    "text": "3. Direct operation with numpy\nThe matrix-vector multiplication approach is useful, particularly in other PDE problems like Poisson equations, where the matrix equation has to be solved. However, with the heat equation, it is not something absolutely necessary in terms of computation. It could be simpler with vectorized array operations like np.roll(). Write a function advance_time_numpy(u, epsilon) that advances the solution by one timestep in the file heat_equation.py. You may pad zeroes to the input array to form an \\((N + 2) \\times (N + 2)\\) array internally, but the argument and the returned solution should still be \\(N \\times N\\).\nRun the code for 2700 iterations. How long does it take? Visualize the diffusion of heat every 300 iterations."
-  },
-  {
-    "objectID": "posts/hw4/index.html#with-jax",
-    "href": "posts/hw4/index.html#with-jax",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "4. With jax",
-    "text": "4. With jax\nNow, let’s use jax to do the similar using just-in-time compilation, defining a function advance_time_jax(u, epsilon) in heat_equation.py – without using (sparse) matrix multiplication routines. It will be simple to use the function advance_time_numpy() as the starting point. Don’t forget to jit! Keep in mind that jax does not support index assignment.\nRun the code for 2700 iterations. How long does it take? It is a good idea to first run it for a small number of iterations to get it compiled, and then run it again with the full 2700 iterations to get high performance with precompiled code. It is possible to make it faster than Part 3, excluding the compilation time. Visualize the diffusion of heat every 300 iterations."
-  },
-  {
-    "objectID": "posts/hw4/index.html#comparison",
-    "href": "posts/hw4/index.html#comparison",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "5. Comparison",
-    "text": "5. Comparison\nCompare the implementation and performances of the four methods. Which one is the fastest? Which one was easier for you to write?"
-  },
-  {
-    "objectID": "posts/hw4/index.html#format",
-    "href": "posts/hw4/index.html#format",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "Format",
-    "text": "Format\n\nAs always, please submit the PDF printout of your blog post preview to the “pdf” window, and any code you wrote (other than the heat_equation module) to the files window, including the files index.ipynb and index.py. Please submit the file heat_equation.py to the autograder."
-  },
-  {
-    "objectID": "posts/hw4/index.html#coding-problem",
-    "href": "posts/hw4/index.html#coding-problem",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "Coding Problem",
-    "text": "Coding Problem\n\nThe functions work correctly – checked by autograder.\nThe contents of all the functions are displayed in the blog post with inspect.getsource().\n\n\nPart 1\n\nThe visualized solution appears correct – the solution should be symmetric, invariant under a 90-degree rotation.\nThe time elapsed is shown, excluding time used for visualization.\n\n\n\nPart 2-4\n\nThe function is implemented as required.\nThe time elapsed is shown, excluding time used for visualization.\nPart 2 should be at least 10x faster than Part 1.\nPart 3 should be at least 100x faster than Part 1.\nPart 4 should be about twice as fast as Part 3.\nThe visualized solution appears correct.\n\n\n\nPart 5\n\nThe four implementations and their performances are compared."
-  },
-  {
-    "objectID": "posts/hw4/index.html#style-and-documentation",
-    "href": "posts/hw4/index.html#style-and-documentation",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "Style and Documentation",
-    "text": "Style and Documentation\n\nCode throughout is written using minimal repetition and clean style.\nDocstrings are helpful.\nPlease make sure to include useful comments and detailed explanations for each of your code blocks.\nAny repeated operations should be enclosed in functions."
-  },
-  {
-    "objectID": "posts/hw4/index.html#writing",
-    "href": "posts/hw4/index.html#writing",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "Writing",
-    "text": "Writing\n\nThe blog post is written in tutorial format, in engaging and clear English. Grammar and spelling errors are acceptable within reason."
-  },
-  {
-    "objectID": "posts/hw4/index.html#footnotes",
-    "href": "posts/hw4/index.html#footnotes",
-    "title": "Homework 4: Heat Diffusion",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nThere are several sparse matrix representations for more general sparsity patterns, including CSR (Compressed Sparse Row), CSC (Compressed Sparse Column), COO (COOrdinate format), etc. They are available in scipy.↩︎"
-  },
-  {
     "objectID": "posts/hw2/index.html",
     "href": "posts/hw2/index.html",
     "title": "Homework 2: Web Scraping",
@@ -354,6 +277,6 @@
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 3: Web Development\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 4: Heat Diffusion\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nOct 27, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 3: Web Development\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]
