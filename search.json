@@ -259,6 +259,97 @@
     "text": "Footnotes\n\n\nOnly the works listed in “Acting” section of the actor page. Keep in mind that “Acting” might not be on the top of their lists; for example, David Holmes is credited with an acting role in HP1, but spent most of his career as a stunt double of Daniel Radcliffe (as a part of Crew). On his page, you will see “Crew” before “Acting”.↩︎"
   },
   {
+    "objectID": "posts/hw5/index.html",
+    "href": "posts/hw5/index.html",
+    "title": "Homework 5: Image Classification",
+    "section": "",
+    "text": "In this assignment, you will learn several new skills and concepts related to image classification in Keras with data fed through TensorFlow Datasets."
+  },
+  {
+    "objectID": "posts/hw5/index.html#acknowledgments",
+    "href": "posts/hw5/index.html#acknowledgments",
+    "title": "Homework 5: Image Classification",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nMajor parts of this assignment, including several code chunks, are based on the Keras Transfer Learning Tutorial. You may find that consulting this tutorial is helpful while completing this assignment, although this shouldn’t be necessary."
+  },
+  {
+    "objectID": "posts/hw5/index.html#load-packages-and-obtain-data",
+    "href": "posts/hw5/index.html#load-packages-and-obtain-data",
+    "title": "Homework 5: Image Classification",
+    "section": "1. Load Packages and Obtain Data",
+    "text": "1. Load Packages and Obtain Data\nStart by making a code block in which you’ll hold your import statements. You can update this block as you go. For now, include\nimport os\nfrom keras import utils \nimport tensorflow_datasets as tfds\nNow, let’s access the data. We’ll use a sample data set from Kaggle that contains labeled images of cats and dogs.\nPaste and run the following code block.\ntrain_ds, validation_ds, test_ds = tfds.load(\n    \"cats_vs_dogs\",\n    # 40% for training, 10% for validation, and 10% for test (the rest unused)\n    split=[\"train[:40%]\", \"train[40%:50%]\", \"train[50%:60%]\"],\n    as_supervised=True,  # Include labels\n)\n\nprint(f\"Number of training samples: {train_ds.cardinality()}\")\nprint(f\"Number of validation samples: {validation_ds.cardinality()}\")\nprint(f\"Number of test samples: {test_ds.cardinality()}\")\nBy running this code, we have created Datasets for training, validation, and testing. You can think of a Dataset as a pipeline that feeds data to a machine learning model. We use data sets in cases in which it’s not necessarily practical to load all the data into memory.\nPaste the following code into the next block. The dataset contains images of different sizes, so we resize them to a fixed size of 150x150.\nresize_fn = keras.layers.Resizing(150, 150)\n\ntrain_ds = train_ds.map(lambda x, y: (resize_fn(x), y))\nvalidation_ds = validation_ds.map(lambda x, y: (resize_fn(x), y))\ntest_ds = test_ds.map(lambda x, y: (resize_fn(x), y))\nThe next block is technical code related to rapidly reading data. If you’re interested in learning more about this kind of thing, you can take a look here. The batch_size determines how many data points are gathered from the directory at once.\nfrom tensorflow import data as tf_data\nbatch_size = 64\n\ntrain_ds = train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()\nvalidation_ds = validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()\ntest_ds = test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()\n\nWorking with Datasets\nYou can get a piece of a data set using the take method; e.g. train_ds.take(1) will retrieve one batch (32 images with labels) from the training data.\nLet’s briefly explore our data set. Write a function to create a two-row visualization of the dataset.\nIn the first row, show three random pictures of cats. In the second row, show three random pictures of dogs. You can see some related code in the linked tutorial above, although you’ll need to make some modifications in order to separate cats and dogs by rows. A docstring is not required.\n\n\nCheck Label Frequencies\nThe following line of code will create an iterator called labels_iterator.\nlabels_iterator= train_ds.unbatch().map(lambda image, label: label).as_numpy_iterator()\nCompute the number of images in the training data with label 0 (corresponding to \"cat\") and label 1 (corresponding to \"dog\").\nThe baseline machine learning model is the model that always guesses the most frequent label. Briefly discuss how accurate the baseline model would be in our case.\nWe’ll treat this as the benchmark for improvement. Our models should do much better than baseline in order to be considered good data science achievements!"
+  },
+  {
+    "objectID": "posts/hw5/index.html#first-model",
+    "href": "posts/hw5/index.html#first-model",
+    "title": "Homework 5: Image Classification",
+    "section": "2. First Model",
+    "text": "2. First Model\nCreate a keras.Sequential model using some of the layers we’ve discussed in class. In each model, include at least two Conv2D layers, at least two MaxPooling2D layers, at least one Flatten layer, at least one Dense layer, and at least one Dropout layer. Train your model and plot the history of the accuracy on both the training and validation sets. Give your model the name model1.\nTo train a model on a Dataset, use syntax like this:\nhistory = model1.fit(train_ds, \n                     epochs=20, \n                     validation_data=validation)\nHere and in later parts of this assignment, training for 20 epochs with the Dataset settings described above should be sufficient.\nYou don’t have to show multiple models, but please do a few experiments to try to get the best validation accuracy you can. Briefly describe a few of the things you tried. Please make sure that you are able to consistently achieve at least 55% validation accuracy in this part (i.e. just a bit better than baseline).\n\nIn bold font, describe the validation accuracy of your model during training. You don’t have to be precise. For example, “the accuracy of my model stabilized between 65% and 70% during training.”\nThen, compare that to the baseline. How much better did you do?\nOverfitting can be observed when the training accuracy is much higher than the validation accuracy. Do you observe overfitting in model1?"
+  },
+  {
+    "objectID": "posts/hw5/index.html#model-with-data-augmentation",
+    "href": "posts/hw5/index.html#model-with-data-augmentation",
+    "title": "Homework 5: Image Classification",
+    "section": "3. Model with Data Augmentation",
+    "text": "3. Model with Data Augmentation\nNow we’re going to add some data augmentation layers to your model. Data augmentation refers to the practice of including modified copies of the same image in the training set. For example, a picture of a cat is still a picture of a cat even if we flip it upside down or rotate it 90 degrees. We can include such transformed versions of the image in our training process in order to help our model learn so-called invariant features of our input images.\n\nFirst, create a keras.layers.RandomFlip() layer. Make a plot of the original image and a few copies to which RandomFlip() has been applied. Make sure to check the documentation for this function!\nNext, create a keras.layers.RandomRotation() layer. Check the docs to learn more about the arguments accepted by this layer. Then, make a plot of both the original image and a few copies to which RandomRotation() has been applied. Now, create a new keras.models.Sequential model called model2 in which the first two layers are augmentation layers. Use a RandomFlip() layer and a RandomRotation() layer. Train your model, and visualize the training history.\n\nPlease make sure that you are able to consistently achieve at least 60% validation accuracy in this part. Scores of near 70% are possible.\nNote: You might find that your model in this section performs a bit worse than the one before, even on the validation set. If so, just comment on it! That doesn’t mean there’s anything wrong with your approach. We’ll see improvements soon.\n\nIn bold font, describe the validation accuracy of your model during training.\nComment on this validation accuracy in comparison to the accuracy you were able to obtain with model1.\nComment again on overfitting. Do you observe overfitting in model2?"
+  },
+  {
+    "objectID": "posts/hw5/index.html#data-preprocessing",
+    "href": "posts/hw5/index.html#data-preprocessing",
+    "title": "Homework 5: Image Classification",
+    "section": "4. Data Preprocessing",
+    "text": "4. Data Preprocessing\nSometimes, it can be helpful to make simple transformations to the input data. For example, in this case, the original data has pixels with RGB values between 0 and 255, but many models will train faster with RGB values normalized between 0 and 1, or possibly between -1 and 1. These are mathematically identical situations, since we can always just scale the weights. But if we handle the scaling prior to the training process, we can spend more of our training energy handling actual signal in the data and less energy having the weights adjust to the data scale.\nThe following code will create a preprocessing layer called preprocessor which you can slot into your model pipeline.\ni = keras.Input(shape=(150, 150, 3))\n# The pixel values have the range of (0, 255), but many models will work better if rescaled to (-1, 1.)\n# outputs: `(inputs * scale) + offset`\nscale_layer = keras.layers.Rescaling(scale=1 / 127.5, offset=-1)\nx = scale_layer(i)\npreprocessor = keras.Model(inputs = i, outputs = x)\nI suggest incorporating the preprocessor layer as the very first layer, before the data augmentation layers. Call the resulting model model3.\nNow, train this model and visualize the training history. This time, please make sure that you are able to achieve at least 80% validation accuracy.\n\nIn bold font, describe the validation accuracy of your model during training.\nComment on this validation accuracy in comparison to the accuracy you were able to obtain with model1.\nComment again on overfitting. Do you observe overfitting in model3?"
+  },
+  {
+    "objectID": "posts/hw5/index.html#transfer-learning",
+    "href": "posts/hw5/index.html#transfer-learning",
+    "title": "Homework 5: Image Classification",
+    "section": "5. Transfer Learning",
+    "text": "5. Transfer Learning\nSo far, we’ve been training models for distinguishing between cats and dogs from scratch. In some cases, however, someone might already have trained a model that does a related task, and might have learned some relevant patterns. For example, folks train machine learning models for a variety of image recognition tasks. Maybe we could use a pre-existing model for our task?\nTo do this, we need to first access a pre-existing “base model”, incorporate it into a full model for our current task, and then train that model.\nPaste the following code in order to download MobileNetV3Large and configure it as a layer that can be included in your model.\nIMG_SHAPE = (150, 150, 3)\nbase_model = keras.applications.MobileNetV3Large(input_shape=IMG_SHAPE,\n                                               include_top=False,\n                                               weights='imagenet')\nbase_model.trainable = False\n\ni = keras.Input(shape=IMG_SHAPE)\nx = base_model(i, training = False)\nbase_model_layer = keras.Model(inputs = i, outputs = x)\nNow, create a model called model4 that uses MobileNetV3Large. For this, you should definitely use the following layers:\n\nThe data augmentation layers from Part §3.\nThe base_model_layer constructed above.\nA Dense(2) layer at the very end to actually perform the classification.\n\nPreprocessing layers can be included in MobileNetV3Large by setting include_preprocessing=True, which is the default. You don’t need a separate preprocessing layer. Between 2. and 3., you might want to place a small number of additional layers, like GlobalMaxPooling2D or possibly Dropout. You don’t need a lot though! Once you’ve constructed the model, check the model.summary() to see why – there is a LOT of complexity hidden in the base_model_layer. Show the summary and comment. How many parameters do we have to train in the model?\nFinally, train your model for 20 epochs, and visualize the training history.\nThis time, please make sure that you are able to achieve at least 93% validation accuracy. That’s not a typo!\n\nIn bold font, describe the validation accuracy of your model during training.\nComment on this validation accuracy in comparison to the accuracy you were able to obtain with model1.\nComment again on overfitting. Do you observe overfitting in model4?"
+  },
+  {
+    "objectID": "posts/hw5/index.html#score-on-test-data",
+    "href": "posts/hw5/index.html#score-on-test-data",
+    "title": "Homework 5: Image Classification",
+    "section": "6. Score on Test Data",
+    "text": "6. Score on Test Data\nFeel free to mess around with various model structures and settings in order to get the best validation accuracy you can. Finally, evaluate the accuracy of your most performant model on the unseen test_ds. How’d you do?"
+  },
+  {
+    "objectID": "posts/hw5/index.html#write-your-report",
+    "href": "posts/hw5/index.html#write-your-report",
+    "title": "Homework 5: Image Classification",
+    "section": "7. Write Your Report",
+    "text": "7. Write Your Report\nTurn your work into a tutorial on the topic of image classification and transfer learning. Make sure to include all the code, summaries, and plots that you created. You might find it useful to refer to the Keras tutorial linked above, but your entire post should be in your own original words. Feel free to link your reader to any resources that you found helpful. Your report should also include analysis of the results you obtain."
+  },
+  {
+    "objectID": "posts/hw5/index.html#format",
+    "href": "posts/hw5/index.html#format",
+    "title": "Homework 5: Image Classification",
+    "section": "Format",
+    "text": "Format\n\nSubmit a pdf print out with the report of the results in a hw5.pdf. Alternatively, you can also send a url of a blog post in a README.txt. Any coding work can be saved in a hw5.py or hw5.ipynb file. Points will be deducted if work is missing."
+  },
+  {
+    "objectID": "posts/hw5/index.html#grading",
+    "href": "posts/hw5/index.html#grading",
+    "title": "Homework 5: Image Classification",
+    "section": "Grading",
+    "text": "Grading\n\n(+2) The visualization in Part 1 is implemented using a function and shows labeled images of cats in one row and labeled images of dogs in another row.\n(+1) Discussion of the baseline model.\n(+2) You discuss the first model setup and what you’ve tried. Compare it to the baseline. Discuss overfitting.\n(+2) There are two visualizations in Part 3 showing the results of applying RandomFlip and RandomRotation to an example image.\n(+2) You discuss the second model setup and what you’ve tried. Compare it to model1. Discuss overfitting.\n(+2) You discuss the third model setup and what you’ve tried. Compare it to model1. Discuss overfitting.\n(+2) You discuss model 4 setup and what you’ve tried. Compare it to model1. Discuss overfitting.\n(+4) Models 1, 2, 3, and 4 are logically constructed and obtain the required validation accuracy in each case:\n\nModel 1 should obtain at least 55% validation accuracy.\nModel 2 should obtain at least 60% validation accuracy.\nModel 3 should obtain at least 80% validation accuracy.\nModel 4 should obtain at least 93% validation accuracy.\n\n(+2) The training history is visualized for each of the four models, including the training and validation performance.\n(+1) The most performant model is evaluated on the test data set. Improper use of the test set, such as fitting the model on the test set, is considered a “minor programming issue,” losing at least three HW points."
+  },
+  {
+    "objectID": "posts/hw5/index.html#style-and-documentation",
+    "href": "posts/hw5/index.html#style-and-documentation",
+    "title": "Homework 5: Image Classification",
+    "section": "Style and Documentation",
+    "text": "Style and Documentation\n\nCode throughout is written using minimal repetition and clean style.\nDocstrings are not required in this assignment, but please make sure to include useful comments and detailed explanations for each of your code blocks."
+  },
+  {
+    "objectID": "posts/hw5/index.html#writing",
+    "href": "posts/hw5/index.html#writing",
+    "title": "Homework 5: Image Classification",
+    "section": "Writing",
+    "text": "Writing\n\nThe tutorial/report is written in tutorial format, in engaging and clear English. Grammar and spelling errors are acceptable within reason."
+  },
+  {
     "objectID": "posts/hw3/index.html",
     "href": "posts/hw3/index.html",
     "title": "Homework 3: Web Development",
@@ -347,6 +438,6 @@
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 2, Winter 2025",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 4: Heat Diffusion\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 3: Web Development\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHomework 4: Heat Diffusion\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 3: Web Development\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 2: Web Scraping\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 4, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 1: Data Wrangling and Visualization\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Posts\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nHomework 5: Image Classification\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 28, 2024\n\n\n\n\n\n\nNo matching items"
   }
 ]
