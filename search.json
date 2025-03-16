@@ -438,7 +438,7 @@
     "href": "posts/hw6/index.html#format",
     "title": "Homework 6: Fake News Classification",
     "section": "Format",
-    "text": "Format\n\nSubmit a pdf print out with the report of the results in a hw6.pdf. Alternatively, you can also send a url of a blog post in a README.txt. Any coding work can be saved in a hw6.py or hw6.ipynb file. Points will be deducted if work is missing.\nThere is no autograder for this homework. Please submit the PDF printout of your blog post to the “pdf” window and any code you wrote to the “files” window – including index.ipynb and index.py."
+    "text": "Format\n\nSubmit a pdf print out with the report of the results in a hw6.pdf. Alternatively, you can also send a url of a blog post in a README.txt. Any coding work can be saved in a hw6.py or hw6.ipynb file. Points will be deducted if work is missing."
   },
   {
     "objectID": "posts/hw6/index.html#grading",
