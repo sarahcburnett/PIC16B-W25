@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-05-20">
 
-<title>UCLA PIC 16B Lec 2, Winter 2025</title>
+<title>Webpage using Google Cloud Credits – UCLA PIC 16B Lec 2, Winter 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-407a182a36860c9c68c0913c6172c981.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-407a182a36860c9c68c0913c6172c981.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +101,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +113,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">UCLA PIC 16B Lec 2, Winter 2025</span>
     </a>
   </div>
@@ -149,7 +124,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -172,339 +147,157 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">UCLA PIC 16B Lec 2, Winter 2025</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Webpage using Google Cloud Credits</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Homework</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 20, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="SG9tZXdvcms=">Homework <span class="quarto-category-count">(8)</span></div><div class="category" data-category="V2VlayUyMDM=">Week 3 <span class="quarto-category-count">(1)</span></div></div></div>
-<!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
-
-
-
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-flask-with-google-cloud-credits" id="toc-using-flask-with-google-cloud-credits" class="nav-link active" data-scroll-target="#using-flask-with-google-cloud-credits">Using Flask with Google Cloud Credits</a>
+  <ul class="collapse">
+  <li><a href="#set-up-your-flask-application" id="toc-set-up-your-flask-application" class="nav-link" data-scroll-target="#set-up-your-flask-application">1. Set Up Your Flask Application</a></li>
+  <li><a href="#create-a-google-cloud-project" id="toc-create-a-google-cloud-project" class="nav-link" data-scroll-target="#create-a-google-cloud-project">2. Create a Google Cloud Project</a></li>
+  <li><a href="#enable-billing-and-apply-credits" id="toc-enable-billing-and-apply-credits" class="nav-link" data-scroll-target="#enable-billing-and-apply-credits">3. Enable Billing and Apply Credits</a></li>
+  <li><a href="#choose-a-google-cloud-service-for-deployment" id="toc-choose-a-google-cloud-service-for-deployment" class="nav-link" data-scroll-target="#choose-a-google-cloud-service-for-deployment">4. Choose a Google Cloud Service for Deployment</a></li>
+  <li><a href="#deploy-your-flask-application-using-google-cloud-app-engine" id="toc-deploy-your-flask-application-using-google-cloud-app-engine" class="nav-link" data-scroll-target="#deploy-your-flask-application-using-google-cloud-app-engine">5. Deploy Your Flask Application using Google Cloud App Engine</a></li>
+  <li><a href="#view-your-website" id="toc-view-your-website" class="nav-link" data-scroll-target="#view-your-website">6. View your Website</a></li>
+  <li><a href="#monitor-your-usage" id="toc-monitor-your-usage" class="nav-link" data-scroll-target="#monitor-your-usage">7. Monitor Your Usage</a></li>
+  </ul></li>
+  <li><a href="#setting-up-a-domain-name" id="toc-setting-up-a-domain-name" class="nav-link" data-scroll-target="#setting-up-a-domain-name">Setting up a domain name</a></li>
+  </ul>
+</nav>
     </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="SG9tZXdvcms=" data-listing-date-sort="1747724400000" data-listing-file-modified-sort="1747770094752" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="756">
-<div class="thumbnail">
-<p><a href="./posts/webpage/index.html" class="no-external"></a></p><a href="./posts/webpage/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/webpage/gus.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/webpage/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/webpage/index.html" class="no-external">Webpage using Google Cloud Credits</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/webpage/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/webpage/index.html" class="no-external">In this tutorial, we will cover how to set up your Flask webpage so that you can run server-side python code on another computer. You will be creating a dynamic live webpage…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/webpage/index.html" class="no-external">
-<div class="listing-date">
-May 20, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="SG9tZXdvcms=" data-listing-date-sort="1741248000000" data-listing-file-modified-sort="1742157571717" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1660">
-<div class="thumbnail">
-<p><a href="./posts/hw6/index.html" class="no-external"></a></p><a href="./posts/hw6/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw6/fake.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw6/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw6/index.html" class="no-external">Homework 6: Fake News Classification</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw6/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw6/index.html" class="no-external">Rampant misinformation — often called “fake news” — is one of the defining features of contemporary democratic life. In this assignment, you will develop and assess a fake…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw6/index.html" class="no-external">
-<div class="listing-date">
-Mar 6, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="SG9tZXdvcms=" data-listing-date-sort="1740729600000" data-listing-file-modified-sort="1740800596866" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2389">
-<div class="thumbnail">
-<p><a href="./posts/hw5/index.html" class="no-external"></a></p><a href="./posts/hw5/index.html" class="no-external">
-<p><img loading="lazy" src="https://static.boredpanda.com/blog/wp-content/uploads/2017/09/funny-cats-vs-dogs-comics-200-59c380533523b__700.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw5/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw5/index.html" class="no-external">Homework 5: Image Classification</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw5/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw5/index.html" class="no-external">In this assignment, you will learn several new skills and concepts related to image classification in Keras with data fed through TensorFlow Datasets.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw5/index.html" class="no-external">
-<div class="listing-date">
-Feb 28, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="SG9tZXdvcms=" data-listing-date-sort="1739520000000" data-listing-file-modified-sort="1739551825446" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1385">
-<div class="thumbnail">
-<p><a href="./posts/hw4/index.html" class="no-external"></a></p><a href="./posts/hw4/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw4/good.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw4/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw4/index.html" class="no-external">Homework 4: Heat Diffusion</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw4/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw4/index.html" class="no-external">In this assignment, you will conduct a numerical studies testing simulations of two-dimensional heat diffusion using different methods.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw4/index.html" class="no-external">
-<div class="listing-date">
-Feb 14, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="SG9tZXdvcms=" data-listing-date-sort="1739433600000" data-listing-file-modified-sort="1739503527119" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1030">
-<div class="thumbnail">
-<p><a href="./posts/hw3/index.html" class="no-external"></a></p><a href="./posts/hw3/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw3/shopping.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw3/index.html" class="no-external">Homework 3: Web Development</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw3/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw3/index.html" class="no-external">In this assignment, you will create a dynamic product page using Flask, SQLite3, and Jinja.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw3/index.html" class="no-external">
-<div class="listing-date">
-Feb 13, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="SG9tZXdvcms=" data-listing-date-sort="1738656000000" data-listing-file-modified-sort="1738694218591" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1678">
-<div class="thumbnail">
-<p><a href="./posts/hw2/index.html" class="no-external"></a></p><a href="./posts/hw2/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw2/spider.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw2/index.html" class="no-external">Homework 2: Web Scraping</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw2/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw2/index.html" class="no-external">What’s your favorite movie? Wouldn’t it be nice to find more shows that you might like to watch, based on ones you know you like? Tools that address questions like this are…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw2/index.html" class="no-external">
-<div class="listing-date">
-Feb 4, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="SG9tZXdvcms=" data-listing-date-sort="1737964800000" data-listing-file-modified-sort="1738535796569" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1780">
-<div class="thumbnail">
-<p><a href="./posts/hw1/index.html" class="no-external"></a></p><a href="./posts/hw1/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw1/temperature.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw1/index.html" class="no-external">Homework 1: Data Wrangling and Visualization</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw1/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw1/index.html" class="no-external">In this assignment, you’ll create several interesting, interactive data graphics using the NOAA climate data that we’ve explored in the first several weeks of lectures.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw1/index.html" class="no-external">
-<div class="listing-date">
-Jan 27, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="SG9tZXdvcms=" data-listing-date-sort="1737446400000" data-listing-file-modified-sort="1737502798761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="537">
-<div class="thumbnail">
-<p><a href="./posts/hw0/index.html" class="no-external"></a></p><a href="./posts/hw0/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/hw0/penguin.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/hw0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/hw0/index.html" class="no-external">Homework 0</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/hw0/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SG9tZXdvcms='); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/hw0/index.html" class="no-external">In this blog post assignment, you’ll create a short post for your new website. The primary purpose is to give you some practice working with Quarto blogging with Python code.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/hw0/index.html" class="no-external">
-<div class="listing-date">
-Jan 21, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="V2VlayUyMDM=" data-listing-date-sort="1737446400000" data-listing-file-modified-sort="1737501228248" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="503">
-<div class="thumbnail">
-<p><a href="./posts/composing/index.html" class="no-external"></a></p><a href="./posts/composing/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/composing/index_files/figure-html/cell-3-output-1.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/composing/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/composing/index.html" class="no-external">Creating Posts</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/composing/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('V2VlayUyMDM='); return false;">
-Week 3
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/composing/index.html" class="no-external">How to create technical posts that include Python code, explanatory text, and notes.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/composing/index.html" class="no-external">
-<div class="listing-date">
-Jan 21, 2025
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In this tutorial, we will cover how to set up your Flask webpage so that you can run server-side python code on another computer. You will be creating a dynamic live webpage that others can view.</p>
+<section id="using-flask-with-google-cloud-credits" class="level1">
+<h1>Using Flask with Google Cloud Credits</h1>
+<p>Here are the steps to deploy a Flask application to Google Cloud using your credits:</p>
+<section id="set-up-your-flask-application" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-your-flask-application">1. Set Up Your Flask Application</h2>
+<ul>
+<li><p>Develop your Flask application locally (or use one of my examples).</p></li>
+<li><p>Ensure you have a <code>requirements.txt</code> file listing all necessary dependencies. You can create this by running <code>pip freeze &gt; requirements.txt</code> in your project directory (and then edit to include only needed packages). Here’s a <a href="requirements.txt" download="true">requirements.txt</a> that you can use to run my notes. A minimal <code>requirements.txt</code> would look like:</p>
+<pre><code>Flask
+gunicorn</code></pre>
+<p>For a more robust setup, consider including Flask’s direct dependencies:</p>
+<pre><code>Flask
+Werkzeug
+Jinja2
+MarkupSafe
+click
+itsdangerous
+blinker
+gunicorn</code></pre></li>
+<li><p>Have your main application file named <code>app.py</code> (or whatever you prefer to call it, but adjust the <code>app.yaml</code> accordingly later). A basic example of <code>app.py</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">'/'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> home():</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"Hello, World!"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    app.run(debug<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="create-a-google-cloud-project" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-google-cloud-project">2. Create a Google Cloud Project</h2>
+<ul>
+<li>Go to the <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>.</li>
+<li>Create a new project by going to the Navigation in the upper left and selecting Cloud Hub&gt;Home. Then “Create project”. Give it a name and note the Project ID.</li>
+</ul>
+</section>
+<section id="enable-billing-and-apply-credits" class="level2">
+<h2 class="anchored" data-anchor-id="enable-billing-and-apply-credits">3. Enable Billing and Apply Credits</h2>
+<ul>
+<li>In the Google Cloud Console, navigate to the <strong>Billing</strong> section.</li>
+<li>Check if billing is enabled for your project by seeing if it’s listed under “Projects linked to this billing account.”</li>
+<li>Apply your Google Cloud Credits to your project. Refer to the <a href="https://cloud.google.com/billing/docs" target="_blank">Google Cloud Billing documentation</a> for specific instructions.</li>
+</ul>
+</section>
+<section id="choose-a-google-cloud-service-for-deployment" class="level2">
+<h2 class="anchored" data-anchor-id="choose-a-google-cloud-service-for-deployment">4. Choose a Google Cloud Service for Deployment</h2>
+<ul>
+<li>Select a deployment service (e.g., Google Cloud App Engine, Google Compute Engine, or Google Cloud Run). This will run your webpage. These instructions will focus on Google Cloud App Engine. At the top of the Google Cloud Console, there’s a search bar. Type “App Engine” into the search bar or go to <a href="https://console.cloud.google.com/appengine" target="_blank">this URL</a>.</li>
+</ul>
+</section>
+<section id="deploy-your-flask-application-using-google-cloud-app-engine" class="level2">
+<h2 class="anchored" data-anchor-id="deploy-your-flask-application-using-google-cloud-app-engine">5. Deploy Your Flask Application using Google Cloud App Engine</h2>
+<ul>
+<li><p><strong>Install the Google Cloud CLI:</strong> Follow the instructions on the <a href="https://cloud.google.com/sdk/docs/install" target="_blank">Google Cloud CLI documentation</a>. It will ask you to put things in your Home directory. I found I had to put them in <code>/usr/local</code> on my mac.</p></li>
+<li><p><strong>Initialize the Cloud CLI:</strong> Open your terminal and run <code>gcloud init</code>. Log in and select your project by its ID.</p></li>
+<li><p><strong>Create an <code>app.yaml</code> file:</strong> In the root directory of your Flask application, create a file named <code>app.yaml</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runtime</span><span class="kw">:</span><span class="at"> python310  </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> gunicorn app:app</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">instance_class</span><span class="kw">:</span><span class="at"> F1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Ensure <code>gunicorn</code> is in your <code>requirements.txt</code>.</li>
+<li>The <code>entrypoint: gunicorn app:app</code> assumes your main Flask app object is named <code>app</code> within your <code>app.py</code> file. Adjust if needed.</li>
+</ul></li>
+<li><p><strong>Deploy the application:</strong> In your terminal, navigate to the root of your Flask app and run:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> app deploy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Choose <code>us-west2</code> for Los Angeles.</p></li>
+<li><p><strong>Access your application:</strong> Once deployed, the Cloud CLI will provide a URL for your application (e.g., <code>your-project-id.appspot.com</code>).</p></li>
+</ul>
+</section>
+<section id="view-your-website" class="level2">
+<h2 class="anchored" data-anchor-id="view-your-website">6. View your Website</h2>
+<ul>
+<li><p>Now if everything was successful, you should be able to do</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> app browse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and see your webpage open.</p></li>
+</ul>
+</section>
+<section id="monitor-your-usage" class="level2">
+<h2 class="anchored" data-anchor-id="monitor-your-usage">7. Monitor Your Usage</h2>
+<ul>
+<li>Track your resource usage and billing in the Google Cloud Console to manage your credits.</li>
+</ul>
+<p>For more detailed information, always refer to the official <a href="https://cloud.google.com/docs" target="_blank">Google Cloud Documentation</a>.</p>
+<p>Most of the demos should run correctly except the one involving cookies/sessions. If you have any issues with these steps, copy and paste the code or send a screenshot to Gemini.</p>
+</section>
+</section>
+<section id="setting-up-a-domain-name" class="level1">
+<h1>Setting up a domain name</h1>
+<p>This part cost some money, but if you’d like the url to have a name people can remember, you might want to purchase a domain name. Prices start at $19.99 a year at <a href="https://www.godaddy.com/" target="_blank">godaddy.com</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
